@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI Face Detection API</title>
+    <link rel="stylesheet" href="css/pages.css" />
+  </head>
+  <body>
+    <div id="barba-wrapper">
+      <div class="barba-container">
+        <div class="page2">
+          <h1>Program Information</h1>
+          <br /><br />
+          <h3>Technologies Used:</h3>
+          <br />
+          <li>JavaScript</li>
+          <li>TensorFlow.js</li>
+          <li>Face-Recognition.js</li>
+          <br /><br />
+          <h3>Breakdown:</h3>
+          <br />
+          <p class="short-width">
+            Tiny Face Detector is used to detect faces and then 68 landmark
+            points are placed on the persons face. This 68 points are then
+            processed through a face detection model that was trained using the
+            widerface dataset.
+          </p>
+          <br />
+          <h3>Test Results:</h3>
+          <br />
+          <li>Mean Age Error = 4.54</li>
+          <li>Total Gender Accuracy: 95%</li>
+          <br /><br />
+          <h3>How to Run:</h3>
+          <br />
+          <li>Enable webcam on browser.</li>
+          <li>Sit infront of webcam.</li>
+          <li>Double click the run button.</li>
+          <li>Get live results.</li>
+          <a href="face-rec.html">run</a>
+        </div>
+      </div>
+    </div>
+  </body>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/barba.js/1.0.0/barba.min.js"></script>
+  <script src="js/barba.js"></script>
+</html>
