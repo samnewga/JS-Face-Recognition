@@ -1,22 +1,28 @@
+// Creating a variable for the video source
 const video = document.getElementById("video");
+
+// Empty array for predicted ages
 let predictedAges = [];
 
+// All the promises for multiple methods avaiable from the API
 Promise.all([
   faceapi.nets.tinyFaceDetector.loadFromUri("/models"),
   faceapi.nets.faceLandmark68Net.loadFromUri("/models"),
   faceapi.nets.faceRecognitionNet.loadFromUri("/models"),
   faceapi.nets.faceExpressionNet.loadFromUri("/models"),
-  faceapi.nets.ageGenderNet.loadFromUri("/models")
+  faceapi.nets.ageGenderNet.loadFromUri("/models"),
 ]).then(startVideo);
 
+// Function to start the video input
 function startVideo() {
   navigator.getUserMedia(
     { video: {} },
-    stream => (video.srcObject = stream),
-    err => console.error(err)
+    (stream) => (video.srcObject = stream),
+    (err) => console.error(err)
   );
 }
 
+// Event listened for when the video source is playing which then runs all our methods and handles all the canvas drawing.
 video.addEventListener("play", () => {
   const canvas = faceapi.createCanvasFromMedia(video);
   document.body.append(canvas);
@@ -46,7 +52,7 @@ video.addEventListener("play", () => {
     const interpolatedAge = interpolateAgePredictions(age);
     const middle = {
       x: resizedDetections[0].detection.box.bottomRight.x - 60,
-      y: resizedDetections[0].detection.box.bottomRight.y
+      y: resizedDetections[0].detection.box.bottomRight.y,
     };
 
     new faceapi.draw.DrawTextField(
@@ -56,6 +62,7 @@ video.addEventListener("play", () => {
   }, 100);
 });
 
+// Function to get the average of all the ages predicted.
 function interpolateAgePredictions(age) {
   predictedAges = [age].concat(predictedAges).slice(0, 50);
   const avgPredictedAge =
